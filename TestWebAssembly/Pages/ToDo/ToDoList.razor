@@ -34,14 +34,7 @@
     
     private readonly IList<ToDoItem> _items = new List<ToDoItem>();
 
-    public void AddItem(ToDoItem newItem)
-    {
-        Console.WriteLine($"Added item {newItem}");
-        _items.Add(newItem);
-    }
+    public void AddItem(ToDoItem newItem) => _items.Add(newItem);
 
-    private void RemoveItem(ToDoItem itemToRemove)
-    {
-        _items.Remove(itemToRemove);
-    }
+    private void RemoveItem(ToDoItem itemToRemove) => _items.Remove(itemToRemove);
 }
