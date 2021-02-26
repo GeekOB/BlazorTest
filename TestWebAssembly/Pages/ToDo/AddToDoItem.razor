@@ -1,0 +1,22 @@
+
+<div class="container">
+    <label>Title:</label><br>
+    <input @bind="_newItem.Title" /><br>
+    <label>Description:</label><br>
+    <input @bind="_newItem.Description" /><br><br>
+    <button class="btn btn-success" @onclick="AddItem">Add</button>
+</div>
+
+@code {
+    [CascadingParameter] ToDoList ToDoList { get; set; }
+
+    private ToDoItem _newItem = new ToDoItem();
+
+    private void AddItem()
+    {
+        Console.WriteLine($"Added item comp");
+        ToDoList.AddItem(_newItem);
+        StateHasChanged();
+        _newItem = new ToDoItem();
+    }
+}

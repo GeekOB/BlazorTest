@@ -1,0 +1,47 @@
+@page "/todolist"
+<h1>ToDo List</h1>
+
+<ul>
+    @foreach (var item in _items)
+    {
+        <li>
+            <div style="max-width: 400px" class="container row">
+                @ToDoItemDisplay(item)
+                <div class="col-5">
+                    <button 
+                        class="btn btn-danger" 
+                        @onclick="() => RemoveItem(item)">Delete
+                    </button>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+
+<CascadingValue Value="this">
+    <AddToDoItem />
+</CascadingValue>
+
+@code {
+
+    private static readonly RenderFragment<ToDoItem> ToDoItemDisplay = item => __builder =>
+    {
+        <div class="col-7">
+            <h3>@item.Title</h3>
+            <label>@item.Description</label>
+        </div>
+    };
+    
+    private readonly IList<ToDoItem> _items = new List<ToDoItem>();
+
+    public void AddItem(ToDoItem newItem)
+    {
+        Console.WriteLine($"Added item {newItem}");
+        _items.Add(newItem);
+    }
+
+    private void RemoveItem(ToDoItem itemToRemove)
+    {
+        _items.Remove(itemToRemove);
+    }
+}
